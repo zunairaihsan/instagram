@@ -1,0 +1,42 @@
+
+<nav class="navbar navbar-light bg-light d-flex">
+      <div class="container">
+        <div class="logo">
+          <a class="navbar-brand" href='<%= accountposts_path(current_account)%>'>
+            <%= fa_stacked_icon "camera inverse", base: "circle"%>
+            Instagram
+          </a>
+        </div>
+        <%= form_tag( search_path(current_account), :method => "get" ) do %>
+        <div class="input-group">
+          <%= search_field_tag :search, params[:search] ,placeholder: "search by username", class: "form-control" %>
+          <div class="input-group-btn">
+            <%= button_tag "search" , :class => "btn btn-info glyphicon glyphicon-seach", :username => nil %>
+          </div>
+        </div>
+        <%end%>
+               
+        <div class="user-section">
+        <% if account_signed_in? %>
+        <a href='<%= new_accountpost_path(current_account)%>'>
+         <i class="fa fa-plus-square-o"></i>
+        </a>
+        <% end %>
+        <% if account_signed_in? %>
+        <a href='<%= profile_path(current_account)%>'>
+         <i class='fa fa-user'></i>
+        </a>
+       <% else %>
+        <a href='<%= new_accounts_session_path%>'>
+          <i class='fa fa-sign-in'></i>
+        </a>
+       <% end %>
+       <% if account_signed_in? %>
+          <%=link_to "stories" , stories_path(current_account)%>
+       <% end %>
+        </div>
+      </div>
+    </nav>
+
+
+    

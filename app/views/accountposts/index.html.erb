@@ -1,0 +1,73 @@
+
+ <% @accountposts.each do |img| %>
+  
+  <div class="instagram-card">
+    <div class="instagram-card-header">
+      <a class="instagram-card-user-name"><%=link_to img.account.username ,profile_path(img.account) %></a>
+    </div>
+    <% if img.images.size == 1 %>
+    <div class="intagram-card-image">  
+      <%= image_tag img.images.first %>
+    </div>
+    
+    <%else%>
+    <% img.images.each do |var| %>
+    <div class="intagram-card-image">  
+      <%= image_tag var %>
+    </div>
+    <%end%>
+    <%end%>
+    
+    <%= link_to like_accountpost_path(img), method: :put do %>
+      <div class="engagement">
+        <%= button_to "like" %>
+        <p><%= img.get_upvotes.size %> </p>
+      </div>
+   <% end %>
+   <%= link_to unlike_accountpost_path(img), method: :put do %>
+      <div class="engagement">
+        <%= button_to "unlike" %>
+        <p><%= img.get_downvotes.size %> </p>
+      </div>
+   <% end %>
+    
+    <div class="instagram-card-content">
+      <p><a class="instagram-card-content-user"> 
+        Caption:<%=img.content%>
+      </a> 
+      </p>
+      <% img.comments.each do |comment| %>
+        <div class="mb-2">
+          <span>
+            <strong>
+              <%= link_to comment.account.username , profile_path(comment.account),
+                class: "no-text-decoration normal-color" %>
+            </strong>
+          </span>
+          <span><%= comment.body %></span>
+            <% if comment.account == current_account ||  img.account == current_account %>
+              <%= link_to "Delete comment" ,accountpost_comment_path(img, comment),method: :delete %>
+            <% end %>
+        </div>
+      <% end %>   
+      <span class='parent-likes'>     
+      </span>
+      <div class="instagram-card-footer">
+        <a class="footer-action-icons">
+      <%= form_for [img, img.comments.new ] do |form| %>
+        <%= form.text_field :body,placeholder: "Add a comment ...", autocomplete: :off %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+      <div>
+      <% if img.account == current_account%>
+        <%= link_to 'Edit', edit_accountpost_path(img) %>
+        <%= link_to 'Destroy', img , method: :delete , data: { confirm: 'Are you sure?' } %>
+      <%end%>
+      </div>
+      <% end %> 
+      </div>
+    </div>
+  </div>
+<%end%>
+

@@ -1,0 +1,30 @@
+
+<div class="d-flex flex-column align-items-center mt-3">
+  <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
+    <div class="card">
+      <div class="card-header">
+        Create Post
+      </div>
+      <div class="card-body">
+      <%= form_with(model: accountpost, local: true, multipart: true) do |form| %>
+          <div class="form-group row mt-2">
+            <div class="col pl-0">
+              <%= form.file_field "images", multiple:true, class: "form-control border-0",
+                placeholder: "Say something about this ..." %>
+            </div>
+          </div>
+          <div class="dz-message m-0"></div>
+          <div class="dropzone-previews mb-3">
+            <div class="upload-photos-icon">
+              <i class="fa fa-plus fa-2x" aria-hidden="true" style="color:#dddfe2"></i>
+            </div>
+          </div>
+          <div class="col pl-0">
+            <%= form.text_field :content %>
+          </div>
+          <%= form.submit "Post", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

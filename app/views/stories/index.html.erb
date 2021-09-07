@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stories</h1>
+
+    <% @stories.each do |story| %>
+      <% if story.image.created_at + 24.hour > Time.now%>
+          <div class="profile row">
+          <div class="col-md-4 avatar">
+          <div class="wrapper">
+            <%= link_to story.account.username , profile_path(story.account) %>
+            <%= image_tag story.image if story.image.attached? %>
+          </div>
+        </div>
+          
+          <tr>
+          <% if story.account == current_account %>
+            <td><%= link_to 'Edit', edit_story_path(story) %></td>
+            <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+            <td><%= link_to 'Show', story %></td>
+          </tr>
+          <%else%>
+          <% story.image.purge %>
+          <% story.destroy %>
+          <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Story', new_story_path %>

@@ -1,0 +1,76 @@
+<div class="profile row">
+  <div class="col-md-4 avatar">
+    <!-- LEFT: AVATAR HERE -->
+  </div>
+  <div class="col-md-8 basic-info">
+    <!-- RIGHT: USER INFORMATION HERE -->
+  </div>
+</div>
+
+<div class="user-profile">
+  <div class="profile row">
+    <div class="col-md-4 avatar">
+      <div class="wrapper">
+        <%= image_tag @account.image if @account.image.attached? %>
+      </div>
+    </div>
+   
+    <div class="col-md-8 basic-info">
+      <div class="user-wrapper">
+	  <h2 class="username"><%=@account.username %></h2>
+    <% if @account.id == current_account.id %>
+      <a class="edit-profile" href="<%= edit_account_registration_path(current_account) %>">
+      <button>Edit Profile</button>
+    <%end%>
+      
+    
+    <% if current_account.followees.include?(@account) %>
+        <h5><%= link_to "Unfollow", unfollow_account_path, class:"btn btn-primary" ,method: "POST" %></h5>
+    <% else %>
+        <h5><%= link_to "Follow", follow_account_path(@account),class:"btn btn-primary" , method: "POST"  %></h5>
+    <% end%>  
+</a>
+      </div>
+      <ul class="posts">
+        <li><span><%= @account.accountposts.count %></span> posts</li>
+        <li><span><%= @account.followees.count %></span><%= link_to 'Followers', @account_path %></li>
+        
+        <li><span><%= @account.followers.count %></span><%= link_to 'Following', profile_path %></li>
+        
+      </ul>
+	  <h2 class="name"><%= current_account.name %></h2>
+	  <%=link_to current_account.website, current_account.website, class:  'website' %>
+    </div>
+    <% if @account.id == current_account.id %>
+      <%= link_to "Log_out", destroy_account_session_path,class:"btn" ,method: :delete %>
+      <%end%>
+  </div>
+</div>
+<div class="user-tabs">
+  <a class="tab active" href="">
+    <i class="fa fa-th"></i>
+    POSTS
+  </a>
+  <a class="tab" href="">
+    <i class="fa fa-tv"></i>
+    IGTV
+  </a>
+  <a class="tab" href="">
+    <i class="fa fa-bookmark"></i>
+    SAVED
+  </a>
+  <a class="tab" href="">
+    <i class="fa fa-tag"></i>
+    TAGGED
+  </a>
+</div>
+<% if @account.id == current_account.id || @account.setprofile=="true" || current_account.followees.include?(@account) %>
+<div class="user-images">
+  <div class="wrapper">
+  <%@account.accountposts.each do |post|%>
+    <%= image_tag post.images.first %>
+  <%end%>
+  </div>
+<%end%>
+ 
+</div>

@@ -1,0 +1,72 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "font-awesome";
+.container{
+    max-width: 1000px;
+  }
+  .navbar{
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+  }
+  .user-section{
+    a{
+      padding-left: 15px;
+    }
+    i.fa{
+      font-size: 22px;
+      color: #000000d4;
+    }
+  }
+  .search-form{
+    input{
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+  .footer{
+    font-size: 12px;
+    padding-top: 30px;
+    ul{
+      padding-left: 0;
+      > li{
+        display: inline;
+        padding-right: 15px;
+        color: #003569;
+      }
+    }
+    p{
+      color: #999;
+    }
+  }
+  .form-edit-user{
+    padding: 30px 100px 10px 50px;
+  .form-group, input{
+      font-size: 14px;
+      color: black;
+    }
+    input, textarea{
+      border: 1px solid #efefef;
+    }
+    .col-form-label{
+      text-align: right;
+      font-weight: 600;
+    }
+  .avatar{
+      height: 38px;
+      width: 38px;
+      border-radius: 50%;
+    }
+    .username{
+      font-size: 20px;
+      line-height: 22px;
+      margin-bottom: 0;
+    }
+    .change-photo{
+      color: #3897f0;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    input[type='submit']{
+      color: white;
+    }
+  }
